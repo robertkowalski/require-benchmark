@@ -1,0 +1,31 @@
+#!/bin/bash
+
+NUM=0
+TIMESTORUN=10
+NODE=$HOME/node/node
+
+if [ -z "$1" ]; then
+	echo "Add type of benchmark as argument (nested, flat, hapi)"
+	exit
+fi
+
+FILE=$1
+if [ "$1" = "nested" ]; then
+	FILE="./data/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/$1"
+fi
+
+if [ "$1" = "hapi" ]; then
+	FILE="newww/server"
+fi
+
+for i in $(eval echo {0..$TIMESTORUN});
+do
+  OUTPUT=$($NODE $FILE.js)
+	echo $OUTPUT
+	VALUE=$(echo $OUTPUT | sed -e 's/[A-Za-z :]*//g')
+	NUM=$(($NUM + $VALUE))
+done
+
+echo ""
+echo "Total time:   $NUM ms"
+echo "Average time: $(($NUM/$TIMESTORUN)) ms"
