@@ -3,15 +3,16 @@
 echo "creating data. this may take some time."
 rm -f flat.js
 rm -rf data
+rm -rf nested-testfile
 
 echo "console.time('node')" >> flat.js
 mkdir -p data
 for i in {0..10000};
 do
-	echo '{"id": "$i"}' > data/$i.json
 	echo "require('./data/$i')" >> flat.js
 	mkdir data/$i
-	echo '{"id": $i}' > data/$i/$i.json
+	echo 'module.exports = "ente"' > data/$i/index.js
+	echo '{"main": "index.js"}' > data/$i/package.json
 done
 echo "console.timeEnd('node')" >> flat.js
 
@@ -20,7 +21,9 @@ DIR="data/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/a/
 mkdir -p $DIR
 
 echo "console.time('node')" >> $DIR/nested.js
-echo '{"id": "$i"}' > nested-testfile.json
+mkdir nested-testfile
+echo 'module.exports = "ente"' > nested-testfile/index.js
+echo '{"main": "index.js"}' > nested-testfile/package.json
 echo "require('./../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../nested-testfile')" >> $DIR/nested.js
 echo "console.timeEnd('node')" >> $DIR/nested.js
 
