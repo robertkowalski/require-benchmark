@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo "creating data. this may take some time."
+rm -f flat.js
+rm -rf data
 
 echo "console.time('node')" >> flat.js
 mkdir -p data
