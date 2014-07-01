@@ -12,15 +12,16 @@ Will create the testdata. It will also download a node webserver for tests
 on a real world example.
 
 ## My Testplan
+1. ./create-data.sh
 
-1. reboot
-2. ./run-benchmark hapi
+2. reboot, then wait 20 secs
+3. ./run-benchmark hapi
 
-3. reboot
-4. ./run-benchmark flat
+4. reboot, then wait 20 secs
+5. ./run-benchmark flat
 
-5. reboot
-6. ./run-benchmark nested
+6. reboot, then wait 20 secs
+7. ./run-benchmark nested
 
 ## My Results
 
